@@ -72,13 +72,6 @@ function CanvasVideo(videoSelector, canvasSelector) {
     sourceVideo.currentTime = 0;
   }
 
-  function destroy() {
-    pause();
-    sourceVideo.style.display = 'initial';
-
-    sourceVideo.parentNode.removeChild(canvas);
-  }
-
 
   /** Render Loop
   ----------------------------------------------------------------------------*/
