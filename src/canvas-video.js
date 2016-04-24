@@ -83,12 +83,12 @@ function CanvasVideo(videoSelector, canvasSelector) {
 
     var canvasCurrentTime = Date.now();
     var elapsed = (canvasCurrentTime - canvasPreviousTime) / 1000;
-    var frameDuration = (1 / 30); // 60 fps
+    var frameDuration = (1 / 30); // 30 fps
 
     if(elapsed >= frameDuration) {
-      /* Every time the video timeline updates, the
-       * 'timeupdate' event fires on the video element.
-       * Each frame is created with drawCanvasFrame() from there.
+      /* Every time the video timeline updates, the 'timeupdate' event fires on
+       * the video element, so we increment here and then call drawCanvasFrame()
+       * from the videoTimeUpdate() event handler.
        */
       sourceVideo.currentTime = sourceVideo.currentTime + elapsed;
       canvasPreviousTime = canvasCurrentTime;
