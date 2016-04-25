@@ -1,12 +1,12 @@
 # ios-video
 
-> Play inline videos in iOS browsers. 
+Play inline videos in iOS browsers.
 
 The purpose of this library is to autoplay inline video on iOS devices without doing anything except opt-in.
 
 There are no options, and there is no requirement to add extra elements to your markup.
 
-**What it does**  
+**What it does**
 A replacement canvas element that inherits all the video element CSS is injected as a
 sibling of the video element, the video element is hidden, and media query CSS changes to the video element are applied to the canvas on window resize / device orientation change.
 
