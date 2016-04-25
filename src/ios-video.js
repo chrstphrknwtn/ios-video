@@ -1,6 +1,6 @@
 'use strict';
 
-function CanvasVideo(videoSelector, canvasSelector) {
+function iOSVideo(videoSelector, canvasSelector) {
 
   var canvasPreviousTime,
       animationFrame,
@@ -156,10 +156,6 @@ function CanvasVideo(videoSelector, canvasSelector) {
   sourceVideo.addEventListener('loadedmetadata', videoLoaded);
   sourceVideo.addEventListener('timeupdate', videoTimeUpdate);
   sourceVideo.addEventListener('canplay', videoCanPlay);
-  // not sure what we're catching here... by whatever.
-  // if (sourceVideo.readyState >= 2) {
-  //   drawCanvasFrame();
-  // }
   window.addEventListener('resize', updateCanvasOnResize)
 
 
