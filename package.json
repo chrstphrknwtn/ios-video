@@ -2,10 +2,7 @@
   "name": "ios-video",
   "version": "0.0.0",
   "description": "",
-  "main": "canvas-video.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "ios-video.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:chrstphrknwtn/ios-video.git"
