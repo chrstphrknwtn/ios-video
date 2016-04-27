@@ -6,7 +6,7 @@ The purpose of this library is to autoplay inline video on iOS devices without d
 
 There are no options, and there is no requirement to add extra elements to your markup.
 
-**What it does**
+**What it does**  
 A replacement canvas element that inherits all the video element CSS is injected as a
 sibling of the video element, the video element is hidden, and media query CSS changes to the video element are applied to the canvas on window resize / device orientation change.
 
@@ -14,12 +14,16 @@ Supports video element attributes `autoplay` and `loop`. Audio is not supported.
 
 ## Install
 ````shell
-npm install ios-video
+npm install ios-video --save
 ````
 
 ## Usage
 ````javascript
-var video = iOSVideo('#myVideo');
+const iOSVideo = require('ios-video');
+
+const myVideoElement = document.querySelector('#my-video');
+
+const video = iOSVideo(myVideoElement);
 
 // Video will play if the video has the 'autoplay' attribute, otherwise:
 video.play();
@@ -34,9 +38,9 @@ The above code will replace the video with a canvas on all browsers and devices,
 
 ````javascript
 var iOS = /iPad|iPhone|iPod/.test(navigator.platform);
-var video;
+var myVideoElement = document.querySelector('#my-video');;
 if (iOS) {
-  video = iOSVideo('#my-video');
+  iOSVideo(myVideoElement);
 }
 ````
 
