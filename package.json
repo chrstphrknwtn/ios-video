@@ -1,6 +1,6 @@
 {
   "name": "ios-video",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Play inline videos in iOS browsers.",
   "main": "index.js",
   "repository": {
