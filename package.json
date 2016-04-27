@@ -2,7 +2,7 @@
   "name": "ios-video",
   "version": "0.0.1",
   "description": "Play inline videos in iOS browsers.",
-  "main": "ios-video.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:chrstphrknwtn/ios-video.git"

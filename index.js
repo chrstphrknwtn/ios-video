@@ -1,22 +1,28 @@
-'use strict';
+function iOSVideo(sourceVideo) {
 
-function iOSVideo(videoSelector, canvasSelector) {
+  if(!sourceVideo) {
+    console.error('iOSVideo: No element supplied as argument.');
+    return;
+  }
 
-  var canvasPreviousTime,
-      animationFrame,
-      isPlaying,
-      sourceWidth,
+  if(sourceVideo.tagName != 'VIDEO') {
+    console.error('iOSVideo: Element argument is not an HTML5 Video');
+    return;
+  }
+
+  var sourceWidth,
       sourceHeight,
+      isPlaying,
+      animationFrame,
+      canvasPreviousTime,
       windowResizeTimeout;
 
-  var sourceVideo   = document.querySelector(videoSelector),
-      canvas        = document.createElement('canvas'),
-      canvasContext = canvas.getContext('2d');
+  var videoClasslist   = sourceVideo.classList,
+      loopPlayback      = sourceVideo.hasAttribute('loop'),
+      autoplay          = sourceVideo.hasAttribute('autoplay');
 
-      canvas.setAttribute('id', videoSelector.replace(/#|\./, '') + '-canvas');
-
-  var loopPlayback  = sourceVideo.hasAttribute('loop'),
-      autoplay      = sourceVideo.hasAttribute('autoplay');
+  var canvas            = document.createElement('canvas'),
+      canvasContext     = canvas.getContext('2d');
 
 
   /** Video & Canvas Styles
@@ -25,15 +31,13 @@ function iOSVideo(videoSelector, canvasSelector) {
    * this avoids showing the big play button UI element on the video before we
    * the video element.
    */
-  (function insertHeadStyle() {
-    if(document.getElementById('canvasVideoHeadStyle')) return;
-
+  if(!document.getElementById('canvasVideoHeadStyle')) {
     var headStyle = document.createElement('style');
+    sourceVideo.classList.add('canvasVideoSource');
     headStyle.setAttribute('id', 'canvasVideoHeadStyle');
     document.head.appendChild(headStyle);
-
-    headStyle.sheet.addRule(videoSelector + '::-webkit-media-controls', 'display:none !important;');
-  })()
+    headStyle.sheet.addRule('.canvasVideoSource::-webkit-media-controls', 'display:none !important;');
+  }
 
   function replaceVideoWithCanvas() {
     /* allows stylesheet display property to be read properly, basically just
@@ -47,6 +51,16 @@ function iOSVideo(videoSelector, canvasSelector) {
         canvas.style[style] = videoStyle[style];
       } catch(e) {}
     }
+
+    for(var videoClass in videoClasslist) {
+      var klass = videoClasslist[videoClass]
+      if (typeof klass === 'string' && klass != 'canvasVideoSource') {
+        try {
+          canvas.classList.add(klass);
+        } catch(e) {}
+      }
+    }
+
     sourceVideo.style.display = 'none';
   }
 
@@ -129,13 +143,14 @@ function iOSVideo(videoSelector, canvasSelector) {
   }
 
   function videoCanPlay() {
-    // Draw the first frame while laoding
-    sourceVideo.pause();
+    if(autoplay) sourceVideo.pause();
     drawCanvasFrame();
   }
 
-  // Update canvas styles to match video upon resize of the window, ensures that
-  // any media query styles are applied appropriately.
+
+  /* Update canvas styles to match video upon resize of the window, ensures that
+   * any media query styles are applied appropriately.
+   */
   function updateCanvasOnResize() {
     if(windowResizeTimeout) clearTimeout(windowResizeTimeout);
 
@@ -174,3 +189,5 @@ function iOSVideo(videoSelector, canvasSelector) {
   }
 
 }
+
+module.exports = iOSVideo;
